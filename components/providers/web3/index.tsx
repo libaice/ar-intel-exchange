@@ -7,6 +7,7 @@ import {
 } from "react";
 import { Web3State, createDefaultState, loadContract } from "./utils";
 import { ethers } from "ethers";
+import { setupHooks } from "@hooks/web3/setupHooks";
 
 const Web3Context = createContext<Web3State>(createDefaultState());
 
@@ -24,6 +25,7 @@ const Web3Provider: FunctionComponent<any> = ({ children }) => {
         provider: provider as any,
         contract: contract as any,
         isLoading: false,
+        hooks: setupHooks({ ethereum: window.ethereum, provider, contract }),
       });
     }
     initWeb3();
