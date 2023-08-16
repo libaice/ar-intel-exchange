@@ -1,5 +1,5 @@
 import type { NextPage } from "next";
-import { BaseLayout } from "../components";
+import { BaseLayout } from "@ui";
 import nfts from "../content/meta.json";
 
 const tabs = [{ name: "Your Collection", href: "#", current: true }];

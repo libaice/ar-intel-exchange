@@ -1,4 +1,4 @@
-import { BaseLayout, NftList } from "components";
+import { BaseLayout, NftList } from "components/ui";
 import type { NextPage } from "next";
 
 import nfts from "../content/meta.json";
