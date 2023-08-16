@@ -1,10 +1,13 @@
+import { Web3Provider } from "@providers";
 import "../styles/globals.css";
 import type { AppProps } from "next/app";
 
 const MyApp = ({ Component, pageProps }: AppProps) => {
   return (
     <>
-      <Component {...pageProps} />
+      <Web3Provider>
+        <Component {...pageProps} />
+      </Web3Provider>
     </>
   );
 };

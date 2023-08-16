@@ -1,7 +1,39 @@
-import { createContext, FunctionComponent, useContext, useEffect, useState } from "react"
+import {
+  createContext,
+  FunctionComponent,
+  useContext,
+  useEffect,
+  useState,
+} from "react";
+import { Web3State, createDefaultState } from "./utils";
+import { ethers } from "ethers";
 
+const Web3Context = createContext<Web3State>(createDefaultState());
 
-const Web3Provider: FunctionComponent = ({ children }) => {
+const Web3Provider: FunctionComponent<any> = ({ children }) => {
+  const [web3Api, setWeb3Api] = useState(createDefaultState());
+
+  useEffect(() => {
+    const provider = new ethers.providers.Web3Provider(window.ethereum as any);
+
+    function initWeb3() {
+      setWeb3Api({
+        ethereum: window.ethereum as any,
+        provider: provider,
+        contract: null,
+        isLoading: false,
+      });
+    }
+    initWeb3();
+  }, []);
+
+  return (
+    <Web3Context.Provider value={web3Api}>{children}</Web3Context.Provider>
+  );
+};
+
+export function useWeb3() {
+  return useContext(Web3Context);
 }
 
 export default Web3Provider;
